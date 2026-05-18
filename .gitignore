@@ -1,0 +1,32 @@
+# 백업 파일 (Phase 작업 중 자동 생성)
+*.bak
+*.pre_phase*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 압축 패키지
+*.zip
+*.tar.gz
+
+# 로컬 Claude 설정 (사용자별)
+.claude/settings.local.json
+
+# (협업자 옛 자산 — 본분석에 사용 안 함. 원격에 있으면 유지, 신규 push 안 함)
+# _review/
+# test/
+new/

@@ -1,0 +1,368 @@
+{
+  "_meta": {
+    "version": "1.4",
+    "project": "Bitcoin safe-haven hypothesis verification (2026 capstone)",
+    "unified_event_keys": [
+      "hormuz_crisis",
+      "soleimani_assassination",
+      "russia_ukraine_war",
+      "israel_hamas_war",
+      "israel_iran",
+      "us_israel_iran"
+    ],
+    "scope_note": "본 프로젝트는 지정학·안보 이벤트 6개로 한정. COVID-19는 분석 범위에서 의도적 제외 (지정학 이벤트가 아니며 별도 동학). v1.1: 1827행 master_data 정본 채택, 이벤트 키 표기 통일.",
+    "data_root": "/mnt/d/project/2026_capstone",
+    "last_updated": "2026-05-18",
+    "master_data_canonical": "Edit_mj/GPR_custom_analysis/master_data_generated/master_data.csv",
+    "master_data_rows": 1827,
+    "results_dir": "Edit_mj/results"
+  },
+  "event_study": {
+    "paper": "MacKinlay, A. C. (1997). Event Studies in Economics and Finance. Journal of Economic Literature, 35(1), 13-39.",
+    "key_assumptions": [
+      "추정창 동안 abnormal return의 분포가 안정적",
+      "추정창에 다른 이벤트가 끼어들지 않음 (no event clustering)",
+      "AR ~ N(0, σ²) under H0",
+      "추정창 ≥ 120 거래일 권장 (검정력)"
+    ],
+    "recommended_params": {
+      "est_window_days": [
+        120,
+        250
+      ],
+      "event_window_days": [
+        -5,
+        5
+      ],
+      "model_btc": "CMRM (Constant Mean Return Model)",
+      "model_others": "Market Model (OLS, market = SP500)",
+      "significance_test": "t-test + Block Bootstrap (Politis & Romano 1994)",
+      "est_window_days_min": 90,
+      "event_window_extended_ok": [
+        -17,
+        17
+      ],
+      "n_bootstrap_min": 1000,
+      "n_bootstrap_recommended": 5000
+    },
+    "red_flags": [
+      "est_window < 90 거래일",
+      "이벤트 날짜가 추정창 내부에 위치",
+      "Bootstrap 미사용 (t-test 단독)",
+      "Placebo 검증 누락",
+      "다중비교 보정 누락 (Bonferroni 또는 BH-FDR)"
+    ],
+    "source_files": [
+      "Edit_mj/이벤트_스터디_v2.ipynb",
+      "_verifier/placebo_test.py",
+      "_verifier/multiple_testing.py"
+    ],
+    "result_files": [
+      "Edit_mj/results/event_study_car.csv",
+      "Edit_mj/results/event_study_ar_timeseries.csv",
+      "Edit_mj/results/event_study_placebo.csv"
+    ],
+    "param_regex": {
+      "est_window": "(EST_PRE|est_window|estimation_window|EST_WINDOW|estimation_period|EST_START)\\s*=\\s*-?([0-9]+)",
+      "event_window": "(EVT_WINDOW|event_window|EVENT_WINDOW)\\s*=\\s*\\(?\\s*-?([0-9]+)",
+      "est_function": "get_estimation_data\\(|estimate_normal_return\\(|estimation_data",
+      "est_end": "(EST_END|est_end|EST_POST)\\s*=\\s*-?([0-9]+)",
+      "n_boot": "(N_BOOT|n_boot|n_bootstrap|N_BOOTSTRAP)\\s*=\\s*([0-9_]+)"
+    },
+    "implementation_note": "본 프로젝트는 추정창을 EST_START/EST_END 변수와 함수로 관리. EVENT_WINDOW=±17일은 표준 ±5일을 확장한 것 — 본 데이터의 이벤트별 ±17일 가용 거래일에 맞춤. 민감도 검증으로 ±5/±10/±17 모두 비교 권장. Bootstrap 5000회, Placebo 검정 보강 필요(red_flag).",
+    "citation_kr": "MacKinlay (1997, JEL 35:13-39)에 따른 표준 이벤트 스터디 절차",
+    "citation_bibtex": "@article{mackinlay1997event,title={Event studies in economics and finance},author={MacKinlay, A Craig},journal={Journal of economic literature},volume={35},number={1},pages={13--39},year={1997}}"
+  },
+  "dcc_garch": {
+    "paper": "Engle, R. F. (2002). Dynamic Conditional Correlation: A Simple Class of Multivariate GARCH Models. Journal of Business & Economic Statistics, 20(3), 339-350.",
+    "secondary_papers": [
+      "Aielli, G. P. (2013). Dynamic Conditional Correlation: On Properties and Estimation. JBES, 31(3), 282-299. (cDCC 보정)"
+    ],
+    "key_assumptions": [
+      "GARCH(1,1) 표준화 잔차의 정규성 (또는 t-분포)",
+      "α + β < 1 정상성(stationarity) 조건",
+      "수익률 시계열 정상성 (ADF 사전 검증)",
+      "표준화 잔차에 자기상관 없음 (Ljung-Box)"
+    ],
+    "recommended_params": {
+      "garch_order": "(1, 1)",
+      "estimation": "Two-step QML (1단계 GARCH, 2단계 DCC) 또는 Student-t 직접 MLE",
+      "optimizer": "L-BFGS-B + Nelder-Mead fallback",
+      "multi_init_starts": ">=5 (격자 10개 권장)",
+      "alpha_bounds_lower": "0.0 ~ 0.01 (직접 MLE는 0.01 권장 — 최소 충격 반응 강제)",
+      "omega_bounds_lower": "1e-4 ~ 0.05 (Two-step는 1e-4, 직접 MLE는 0.05 권장 — omega=0 과적합 차단)",
+      "hessian_method": "numdifftools.Richardson 외삽법 (중앙차분 고정 eps는 SE 과대추정 위험)",
+      "tstat_outlier_filter": "|t-stat| > 100이면 SE 신뢰 불가 표시",
+      "distribution": "Student-t 권장 (BTC 수익률 fat-tail). 정규분포 사용 시 잔차 적합 검정 필수",
+      "seed": "고정 (재현성)",
+      "estimation_alternatives": [
+        "Two-step QML (1단계 GARCH, 2단계 DCC)",
+        "Student-t 직접 MLE (단일 다변수 우도, multi-init 격자)"
+      ]
+    },
+    "red_flags": [
+      "α + β >= 1 (비정상)",
+      "단일 초기값 MLE (지역 최솟값 위험)",
+      "ADF 사전검증 미수행",
+      "잔차 진단(Ljung-Box) 미수행",
+      "Aielli 2013 cDCC 보정 미적용 시 일관추정 위반 가능",
+      "alpha bounds 1e-6 사용 (경계 수렴 차단으로 비정상 t-stat 유발)",
+      "omega 하한 < 1e-4 (과적합 위험)",
+      "Hessian 중앙차분 고정 eps (Richardson 외삽법 권장)",
+      "t-stat > 100 미필터 (alpha=0 경계 수렴 신호)",
+      "seed 미고정 (재현 불가)"
+    ],
+    "source_files": [
+      "GARCH/GARCH_분석_통합최종본.ipynb"
+    ],
+    "result_files": [
+      "Edit_mj/results/garch_model_comparison.csv",
+      "Edit_mj/results/garch_gamma_results.csv",
+      "Edit_mj/results/garch_model_params.csv",
+      "Edit_mj/results/garch_conditional_volatility.csv",
+      "Edit_mj/results/garch_event_dummy_comparison.csv",
+      "Edit_mj/results/egarch_model_comparison.csv",
+      "Edit_mj/results/egarch_exog_coefficients.csv",
+      "Edit_mj/results/garch_egarch_integrated_summary.csv"
+    ],
+    "param_regex": {
+      "alpha_beta_sum": "(alpha|a)\\s*\\+\\s*(beta|b)",
+      "garch_order": "GARCH\\s*\\(\\s*([0-9]+)\\s*,\\s*([0-9]+)\\s*\\)",
+      "n_init": "(n_init|N_INIT|multi_init|num_starts|n_starts)\\s*=\\s*([0-9]+)",
+      "omega_lower": "omega.*?(lower|bound|min).*?([0-9.eE+-]+)"
+    },
+    "citation_kr": "Engle (2002, JBES 20:339-350) DCC-GARCH 표준; Aielli (2013) cDCC 일관추정 보정",
+    "citation_bibtex": "@article{engle2002dynamic,title={Dynamic conditional correlation},author={Engle, Robert},journal={JBES},volume={20},number={3},pages={339--350},year={2002}}",
+    "implementation_note": "본 프로젝트는 arch_model 대신 직접 Student-t MLE (scipy.optimize.minimize L-BFGS-B). 이유: arch_model이 외생변수를 평균 방정식에만 받고 분산 방정식 GARCH-X 지원이 약함. 5 모델 × 10 초기값 격자 multi-init, Richardson 외삽법 Hessian SE, omega 하한 0.05·alpha 하한 0.01로 과적합·경계 수렴 차단. Step 9 이벤트 더미 강건성, Step 10 EGARCH 비대칭 강건성으로 보강."
+  },
+  "quantile_reg": {
+    "paper": "Koenker, R., & Bassett, G. (1978). Regression Quantiles. Econometrica, 46(1), 33-50.",
+    "secondary_papers": [
+      "Bouri, E., Gupta, R., Tiwari, A. K., & Roubaud, D. (2017). Does Bitcoin hedge global uncertainty? Evidence from wavelet-based quantile-in-quantile regressions. Finance Research Letters, 23, 87-95."
+    ],
+    "key_assumptions": [
+      "각 분위수에서 조건부 분위함수가 선형",
+      "분위 크로싱 없음 (또는 보정됨)",
+      "표본 크기 충분 (분위 τ당 n*τ ≥ 30 권장)",
+      "오차의 i.i.d. 또는 부트스트랩 표준오차 사용"
+    ],
+    "recommended_params": {
+      "tau_extreme": [
+        0.05,
+        0.1
+      ],
+      "tau_median": [
+        0.5
+      ],
+      "se_method": "bootstrap (XY-pair) 또는 sandwich",
+      "min_sample_per_tau": 30,
+      "tau_grid_extended": [
+        0.01,
+        0.025,
+        0.05,
+        0.1,
+        0.2,
+        0.25,
+        0.5,
+        0.75,
+        0.9,
+        0.95
+      ],
+      "core_tau": [
+        0.05,
+        0.1,
+        0.5
+      ],
+      "se_method_actual": "HAC (Newey-West) bandwidth = 4*(n/100)^(2/9)",
+      "robustness_checks": [
+        "IV",
+        "LOO",
+        "MM"
+      ],
+      "tau_extreme_allowed": [
+        0.01,
+        0.025,
+        0.05,
+        0.1
+      ]
+    },
+    "red_flags": [
+      "τ < 0.01 또는 τ > 0.99 (극단 표본 부족)",
+      "분위 크로싱 (β(τ=0.05) > β(τ=0.10) 등)",
+      "표준오차가 OLS sandwich (분위회귀에 부적합)",
+      "다중비교 보정 누락"
+    ],
+    "source_files": [
+      "Edit_mj/GPR_custom_analysis/master_data_generated/분위수_회귀.ipynb",
+      "_verifier/multiple_testing.py"
+    ],
+    "result_files": [
+      "Edit_mj/results/quantile_results.csv",
+      "Edit_mj/results/quantile_robust_iv.csv",
+      "Edit_mj/results/quantile_robust_loo.csv",
+      "Edit_mj/results/quantile_robust_mm.csv"
+    ],
+    "param_regex": {
+      "tau": "(TAUS|tau_grid|tau_list|TAU_LIST|CORE_TAUS)\\s*=\\s*\\[([0-9.,\\s]+)\\]",
+      "n_boot": "(N_BOOT|n_boot)\\s*=\\s*([0-9_]+)",
+      "tau_single": "(tau|TAU|quantile)\\s*=\\s*([0-9.]+)"
+    },
+    "citation_kr": "Koenker & Bassett (1978, Econometrica 46:33-50) 분위회귀; Bouri 외 (2017, FRL 23:87-95) Bitcoin 적용",
+    "citation_bibtex": "@article{koenker1978regression,title={Regression quantiles},author={Koenker, Roger and Bassett Jr, Gilbert},journal={Econometrica},volume={46},number={1},pages={33--50},year={1978}}",
+    "implementation_note": "본 프로젝트는 statsmodels QuantReg + HAC(Newey-West) SE. τ 격자 광역(10단계), CORE=[0.05, 0.10, 0.50]. Robustness: IV(Instrumental Variables), LOO(Leave-One-Out by event), MM(Method of Moments) 3종. 다중비교 보정 (BH-FDR) 미적용 — Phase 3 자가 피드백에서 후처리 보강 예정 (red_flag)."
+  },
+  "gpr_hybrid": {
+    "paper": "Caldara, D., & Iacoviello, M. (2022). Measuring Geopolitical Risk. American Economic Review, 112(4), 1194-1225.",
+    "secondary_papers": [
+      "OECD (2008). Handbook on Constructing Composite Indicators: Methodology and User Guide.",
+      "Araci, D. (2019). FinBERT: Financial Sentiment Analysis with Pre-trained Language Models. arXiv:1908.10063."
+    ],
+    "key_assumptions": [
+      "Caldara-Iacoviello GPR는 신문 기사 기반 표준 지수",
+      "PCA로 합성지수 만들 시 제1주성분 분산설명비 ≥ 70% 권장 (OECD 2008)",
+      "FinBERT 감성점수는 [-1, 1] 정규화 후 사용",
+      "EII 가중치 학습 데이터 ≠ 적용 데이터 (순환논리 배제)"
+    ],
+    "recommended_params": {
+      "pca_min_variance_explained": 0.7,
+      "finbert_threshold": 0.5,
+      "weight_optimization_window": "이벤트 ±30거래일 외부",
+      "interpolation_at_boundary": "선형, ±5 거래일"
+    },
+    "red_flags": [
+      "EII 가중치를 검증 대상 기간 데이터로 학습 (순환논리)",
+      "PCA 분산설명비 < 70% (합성 정당성 부족)",
+      "FinBERT 미세조정 없이 일반 도메인 점수 사용",
+      "Caldara-Iacoviello (2022) 원 지수와의 상관관계 미보고"
+    ],
+    "source_files": [
+      "Edit_mj/GPR_custom_analysis/GPR_custom_analysis.ipynb",
+      "Edit_mj/GPR_custom_analysis/master_data_generated/master_data_generated.ipynb"
+    ],
+    "result_files": [
+      "Edit_mj/GPR_custom_analysis/gpr_combined.csv",
+      "Edit_mj/GPR_custom_analysis/total_custom_gpr_final.csv",
+      "Edit_mj/GPR_custom_analysis/gpr_correlation_summary.csv"
+    ],
+    "param_regex": {
+      "pca_components": "n_components\\s*=\\s*([0-9]+)",
+      "interpolation_window": "(boundary|interp|window)\\s*=\\s*([0-9]+)"
+    },
+    "citation_kr": "Caldara & Iacoviello (2022, AER 112:1194-1225) GPR 지수; OECD (2008) 합성지수 PCA 표준; Araci (2019) FinBERT",
+    "citation_bibtex": "@article{caldara2022measuring,title={Measuring geopolitical risk},author={Caldara, Dario and Iacoviello, Matteo},journal={American Economic Review},volume={112},number={4},pages={1194--1225},year={2022}}"
+  },
+  "bootstrap": {
+    "paper": "Politis, D. N., & Romano, J. P. (1994). The Stationary Bootstrap. Journal of the American Statistical Association, 89(428), 1303-1313.",
+    "key_assumptions": [
+      "시계열의 정상성 (stationarity)",
+      "블록 길이는 자기상관 길이를 충분히 포함",
+      "재표집 횟수 ≥ 1000 (CI 안정성)"
+    ],
+    "recommended_params": {
+      "block_length": "Politis & White (2004) 자동선택 또는 ⌈n^(1/3)⌉",
+      "n_bootstrap": [
+        1000,
+        5000,
+        10000
+      ],
+      "ci_method": "percentile 또는 BCa",
+      "seed": "고정 (재현성)"
+    },
+    "red_flags": [
+      "n_bootstrap < 1000",
+      "고정 블록 크기지만 정당화 없음",
+      "iid bootstrap 사용 (시계열 자기상관 무시)",
+      "시드 미고정 (재현 불가)"
+    ],
+    "source_files": [
+      "Edit_mj/이벤트_스터디_v2.ipynb"
+    ],
+    "result_files": [],
+    "param_regex": {
+      "n_boot": "(n_boot|N_BOOT|n_bootstrap|nboot)\\s*=\\s*([0-9]+)",
+      "block": "(block|BLOCK|block_size)\\s*=\\s*([0-9]+)"
+    },
+    "citation_kr": "Politis & Romano (1994, JASA 89:1303-1313) Stationary Bootstrap; Politis & White (2004) 자동 블록선택",
+    "citation_bibtex": "@article{politis1994stationary,title={The stationary bootstrap},author={Politis, Dimitris N and Romano, Joseph P},journal={JASA},volume={89},number={428},pages={1303--1313},year={1994}}"
+  },
+  "multiple_testing": {
+    "paper": "Benjamini, Y., & Hochberg, Y. (1995). Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing. Journal of the Royal Statistical Society B, 57(1), 289-300.",
+    "secondary_papers": [
+      "Bonferroni, C. E. (1936). Teoria statistica delle classi e calcolo delle probabilità."
+    ],
+    "key_assumptions": [
+      "검정 가족(family) 사전 정의 필요",
+      "Bonferroni: 매우 보수적 (FWER 강제)",
+      "BH-FDR: 발견율 제어, 일반적으로 검정력 우월",
+      "검정 간 의존성에 따라 BY 보정 고려"
+    ],
+    "recommended_params": {
+      "bonferroni_alpha_star": "α / m (m = 검정 수)",
+      "bh_fdr_q": 0.05,
+      "family_definition": "사전 명시 (이벤트 × 자산 등)"
+    },
+    "red_flags": [
+      "보정 미적용",
+      "검정 가족(m) 정의 모호 (post-hoc 변경)",
+      "Bonferroni 사용하면서 미검출 결과를 'BTC ≠ safe-haven'으로 해석 (검정력 부족 가능)",
+      "BH-FDR 적용 시 의존성 무시 (BY 보정 고려)"
+    ],
+    "source_files": [
+      "Edit_mj/results/event_study_car.csv",
+      "Edit_mj/results/quantile_results.csv"
+    ],
+    "result_files": [
+      "Edit_mj/results/multiple_testing_adjusted.csv"
+    ],
+    "param_regex": {
+      "bonferroni": "(bonferroni|alpha_star|alpha_bonf)",
+      "fdr": "(fdr|FDR|benjamini)"
+    },
+    "citation_kr": "Benjamini & Hochberg (1995, JRSSB 57:289-300) FDR 보정; Bonferroni (1936) FWER 보정",
+    "citation_bibtex": "@article{benjamini1995controlling,title={Controlling the false discovery rate},author={Benjamini, Yoav and Hochberg, Yosef},journal={JRSSB},volume={57},number={1},pages={289--300},year={1995}}"
+  },
+  "safe_haven": {
+    "paper": "Baur, D. G., & Lucey, B. M. (2010). Is Gold a Hedge or a Safe Haven? An Analysis of Stocks, Bonds and Gold. Financial Review, 45(2), 217-229.",
+    "secondary_papers": [
+      "Baur, D. G., & McDermott, T. K. (2010). Is gold a safe haven? International evidence. Journal of Banking & Finance, 34(8), 1886-1898."
+    ],
+    "key_assumptions": [
+      "Hedge: 평균적으로 위험자산과 무상관 또는 음의 상관",
+      "Diversifier: 평균적으로 위험자산과 양의 (그러나 완전하지 않은) 상관",
+      "Weak Safe Haven: 위기 시 무상관",
+      "Strong Safe Haven: 위기 시 음의 상관",
+      "위기(crisis) 정의: 시장 수익률 분포 하위 5% 또는 1% 분위"
+    ],
+    "recommended_params": {
+      "crisis_quantile": [
+        0.01,
+        0.05,
+        0.1
+      ],
+      "minimum_evidence": "다중 이벤트에서 일관된 결과",
+      "test_methods": [
+        "quantile regression β coefficient",
+        "rolling correlation in crisis windows",
+        "event study CAR"
+      ]
+    },
+    "red_flags": [
+      "용어 오용 ('strong safe haven' 주장하면서 양의 상관)",
+      "단일 이벤트만으로 일반화",
+      "위기 정의를 사후적으로 변경",
+      "조건 ①(CAR≥0), ②(상관계수 감소), ③(β<0)을 모두 검토하지 않음"
+    ],
+    "source_files": [
+      "Edit_mj/이벤트_스터디_v2.ipynb",
+      "GARCH/GARCH_분석_통합최종본.ipynb",
+      "Edit_mj/GPR_custom_analysis/master_data_generated/분위수_회귀.ipynb"
+    ],
+    "result_files": [
+      "Edit_mj/results/final_judgment.csv",
+      "Edit_mj/results/final_report.md"
+    ],
+    "param_regex": {},
+    "citation_kr": "Baur & Lucey (2010, Financial Review 45:217-229) safe-haven 표준 정의 (hedge/diversifier/weak/strong); Baur & McDermott (2010, JBF 34:1886-1898) 국제 검증",
+    "citation_bibtex": "@article{baur2010gold,title={Is gold a hedge or a safe haven? An analysis of stocks, bonds and gold},author={Baur, Dirk G and Lucey, Brian M},journal={Financial Review},volume={45},number={2},pages={217--229},year={2010}}"
+  }
+}
