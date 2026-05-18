@@ -1,0 +1,7 @@
+﻿event_name,event_label,C1_event_study_pass,C1_detail,C2_quantile_reg_pass,C2_detail,C3_garch_pass,C3_detail,score,verdict
+hormuz_crisis,호르무즈 위기,True,CAR=+0.081 (p_BH=0.849) Weak non-neg,True,β=-0.0116 (p_BH=0.530) Weak non-pos,True,"GPR γ 모두 비유의 (n=4, max p=0.583)",3,Safe Haven
+soleimani_assassination,솔레이마니 암살,True,CAR=+0.142 (p_BH=0.849) Weak non-neg | placebo_p=0.140,False,β=+0.0141 (p_BH=0.000) 유의 양수 → 위험자산,True,"GPR γ 모두 비유의 (n=4, max p=0.583)",2,Weak Haven
+russia_ukraine_war,러-우 전쟁,True,CAR=+0.113 (p_BH=0.849) Weak non-neg | placebo_p=0.640,False,β=+0.0317 (p_BH=0.000) 유의 양수 → 위험자산,True,"GPR γ 모두 비유의 (n=4, max p=0.583)",2,Weak Haven
+israel_hamas_war,이스라엘-하마스,True,CAR=-0.029 (p_BH=0.849) 비유의 음수 | placebo_p=0.130,False,β=+0.0126 (p_BH=0.032) 유의 양수 → 위험자산,True,"GPR γ 모두 비유의 (n=4, max p=0.583)",2,Weak Haven
+israel_iran,이스라엘-이란 충돌,True,CAR=-0.063 (p_BH=0.849) 비유의 음수 | placebo_p=0.350,False,β=+0.0237 (p_BH=0.000) 유의 양수 → 위험자산,True,"GPR γ 모두 비유의 (n=4, max p=0.583)",2,Weak Haven
+us_israel_iran,미-이스라엘-이란,True,CAR=+0.132 (p_BH=0.849) Weak non-neg | placebo_p=0.610,False,데이터 없음,True,"GPR γ 모두 비유의 (n=4, max p=0.583)",2,Weak Haven

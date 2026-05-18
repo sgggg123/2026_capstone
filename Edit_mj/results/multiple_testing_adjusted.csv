@@ -1,0 +1,157 @@
+﻿method,identifier,p_raw,p_bh,sig_bh
+event_study,hormuz_crisis × BTC,0.4359347639398896,0.8492922771786785,False
+event_study,hormuz_crisis × Gold,0.8312316462185234,0.9591134379444501,False
+event_study,hormuz_crisis × TLT,0.7812517300651882,0.9375020760782259,False
+event_study,hormuz_crisis × DXY,0.1689711426144036,0.8492922771786785,False
+event_study,hormuz_crisis × NASDAQ,0.3925364736517847,0.8492922771786785,False
+event_study,soleimani_assassination × BTC,0.1802748405264034,0.8492922771786785,False
+event_study,soleimani_assassination × Gold,0.2640350251845811,0.8492922771786785,False
+event_study,soleimani_assassination × TLT,0.7338078527450991,0.9375020760782259,False
+event_study,soleimani_assassination × DXY,0.7540943898935049,0.9375020760782259,False
+event_study,soleimani_assassination × NASDAQ,0.0703750487144572,0.8492922771786785,False
+event_study,russia_ukraine_war × BTC,0.3374799985517498,0.8492922771786785,False
+event_study,russia_ukraine_war × Gold,0.5438793734963019,0.8587569055204766,False
+event_study,russia_ukraine_war × TLT,0.3503367407885349,0.8492922771786785,False
+event_study,russia_ukraine_war × DXY,0.324046402508356,0.8492922771786785,False
+event_study,russia_ukraine_war × NASDAQ,0.5822331339153399,0.8733497008730099,False
+event_study,israel_hamas_war × BTC,0.4172379209673855,0.8492922771786785,False
+event_study,israel_hamas_war × Gold,0.1162374224794504,0.8492922771786785,False
+event_study,israel_hamas_war × TLT,0.7746043969551621,0.9375020760782259,False
+event_study,israel_hamas_war × DXY,0.6231871781877456,0.8902673974110652,False
+event_study,israel_hamas_war × NASDAQ,0.9824143061220924,0.9824143061220924,False
+event_study,israel_iran × BTC,0.4812656237345845,0.8492922771786785,False
+event_study,israel_iran × Gold,0.0400813226672649,0.8492922771786785,False
+event_study,israel_iran × TLT,0.9285179298326732,0.9824143061220924,False
+event_study,israel_iran × DXY,0.9443361053254272,0.9824143061220924,False
+event_study,israel_iran × NASDAQ,0.9649004468730332,0.9824143061220924,False
+event_study,us_israel_iran × BTC,0.1065239663181909,0.8492922771786785,False
+event_study,us_israel_iran × Gold,0.4074803605825507,0.8492922771786785,False
+event_study,us_israel_iran × TLT,0.5340947140857215,0.8587569055204766,False
+event_study,us_israel_iran × DXY,0.2833020120500278,0.8492922771786785,False
+event_study,us_israel_iran × NASDAQ,0.4731143619391333,0.8492922771786785,False
+quantile_reg,전체 × SP500+GPR+IA × τ=0.05 × SP500_z,0.0,0.0,True
+quantile_reg,전체 × SP500+GPR+IA × τ=0.05 × GPR_custom_z,0.7445,0.9287821782178218,False
+quantile_reg,전체 × SP500+GPR+IA × τ=0.05 × SP500_x_GPR,0.0367,0.14916774193548388,False
+quantile_reg,전체 × SP500+GPR+IA × τ=0.1 × SP500_z,0.0,0.0,True
+quantile_reg,전체 × SP500+GPR+IA × τ=0.1 × GPR_custom_z,0.9908,0.9908,False
+quantile_reg,전체 × SP500+GPR+IA × τ=0.1 × SP500_x_GPR,0.6091,0.8877931034482759,False
+quantile_reg,전체 × SP500+GPR+IA × τ=0.5 × SP500_z,0.0,0.0,True
+quantile_reg,전체 × SP500+GPR+IA × τ=0.5 × GPR_custom_z,0.4902,0.8141538461538461,False
+quantile_reg,전체 × SP500+GPR+IA × τ=0.5 × SP500_x_GPR,0.9529,0.9605232,False
+quantile_reg,전체 × Gold+GPR+IA × τ=0.05 × Gold_z,0.0013,0.00963529411764706,True
+quantile_reg,전체 × Gold+GPR+IA × τ=0.05 × GPR_custom_z,0.5599,0.8603341463414633,False
+quantile_reg,전체 × Gold+GPR+IA × τ=0.05 × Gold_x_GPR,0.103,0.29281304347826087,False
+quantile_reg,전체 × Gold+GPR+IA × τ=0.1 × Gold_z,0.0047,0.028200000000000003,True
+quantile_reg,전체 × Gold+GPR+IA × τ=0.1 × GPR_custom_z,0.7768,0.9359681415929204,False
+quantile_reg,전체 × Gold+GPR+IA × τ=0.1 × Gold_x_GPR,0.2474,0.5374551724137931,False
+quantile_reg,전체 × Gold+GPR+IA × τ=0.5 × Gold_z,0.0009,0.0070875,True
+quantile_reg,전체 × Gold+GPR+IA × τ=0.5 × GPR_custom_z,0.5393,0.8493975,False
+quantile_reg,전체 × Gold+GPR+IA × τ=0.5 × Gold_x_GPR,0.9277,0.9589317073170731,False
+quantile_reg,호르무즈 위기 × SP500+GPR+IA × τ=0.05 × SP500_z,0.2535,0.5413728813559322,False
+quantile_reg,호르무즈 위기 × SP500+GPR+IA × τ=0.05 × GPR_custom_z,0.2194,0.49365000000000003,False
+quantile_reg,호르무즈 위기 × SP500+GPR+IA × τ=0.05 × SP500_x_GPR,0.0526,0.1873421052631579,False
+quantile_reg,호르무즈 위기 × SP500+GPR+IA × τ=0.1 × SP500_z,0.8503,0.9398052631578947,False
+quantile_reg,호르무즈 위기 × SP500+GPR+IA × τ=0.1 × GPR_custom_z,0.3266,0.6051705882352941,False
+quantile_reg,호르무즈 위기 × SP500+GPR+IA × τ=0.1 × SP500_x_GPR,0.2663,0.5500622950819671,False
+quantile_reg,호르무즈 위기 × SP500+GPR+IA × τ=0.5 × SP500_z,0.0559,0.1873421052631579,False
+quantile_reg,호르무즈 위기 × SP500+GPR+IA × τ=0.5 × GPR_custom_z,0.0428,0.1634181818181818,False
+quantile_reg,호르무즈 위기 × SP500+GPR+IA × τ=0.5 × SP500_x_GPR,0.0305,0.13725,False
+quantile_reg,호르무즈 위기 × Gold+GPR+IA × τ=0.05 × Gold_z,0.0902,0.2772,False
+quantile_reg,호르무즈 위기 × Gold+GPR+IA × τ=0.05 × GPR_custom_z,0.3205,0.6027313432835821,False
+quantile_reg,호르무즈 위기 × Gold+GPR+IA × τ=0.05 × Gold_x_GPR,0.0837,0.263655,False
+quantile_reg,호르무즈 위기 × Gold+GPR+IA × τ=0.1 × Gold_z,0.0565,0.1873421052631579,False
+quantile_reg,호르무즈 위기 × Gold+GPR+IA × τ=0.1 × GPR_custom_z,0.3375,0.616304347826087,False
+quantile_reg,호르무즈 위기 × Gold+GPR+IA × τ=0.1 × Gold_x_GPR,0.12,0.32170212765957445,False
+quantile_reg,호르무즈 위기 × Gold+GPR+IA × τ=0.5 × Gold_z,0.2042,0.47646666666666665,False
+quantile_reg,호르무즈 위기 × Gold+GPR+IA × τ=0.5 × GPR_custom_z,0.7431,0.9287821782178218,False
+quantile_reg,호르무즈 위기 × Gold+GPR+IA × τ=0.5 × Gold_x_GPR,0.7822,0.9359681415929204,False
+quantile_reg,솔레이마니 암살 × SP500+GPR+IA × τ=0.05 × SP500_z,0.0,0.0,True
+quantile_reg,솔레이마니 암살 × SP500+GPR+IA × τ=0.05 × GPR_custom_z,0.8368,0.9359681415929204,False
+quantile_reg,솔레이마니 암살 × SP500+GPR+IA × τ=0.05 × SP500_x_GPR,0.1978,0.47646666666666665,False
+quantile_reg,솔레이마니 암살 × SP500+GPR+IA × τ=0.1 × SP500_z,0.0,0.0,True
+quantile_reg,솔레이마니 암살 × SP500+GPR+IA × τ=0.1 × GPR_custom_z,0.6498,0.8970652173913044,False
+quantile_reg,솔레이마니 암살 × SP500+GPR+IA × τ=0.1 × SP500_x_GPR,0.2108,0.48292363636363633,False
+quantile_reg,솔레이마니 암살 × SP500+GPR+IA × τ=0.5 × SP500_z,0.0479,0.17751176470588237,False
+quantile_reg,솔레이마니 암살 × SP500+GPR+IA × τ=0.5 × GPR_custom_z,0.7376,0.9287821782178218,False
+quantile_reg,솔레이마니 암살 × SP500+GPR+IA × τ=0.5 × SP500_x_GPR,0.9361,0.9589317073170731,False
+quantile_reg,솔레이마니 암살 × Gold+GPR+IA × τ=0.05 × Gold_z,0.0014,0.0098,True
+quantile_reg,솔레이마니 암살 × Gold+GPR+IA × τ=0.05 × GPR_custom_z,0.1994,0.47646666666666665,False
+quantile_reg,솔레이마니 암살 × Gold+GPR+IA × τ=0.05 × Gold_x_GPR,0.0117,0.058968,False
+quantile_reg,솔레이마니 암살 × Gold+GPR+IA × τ=0.1 × Gold_z,0.0,0.0,True
+quantile_reg,솔레이마니 암살 × Gold+GPR+IA × τ=0.1 × GPR_custom_z,0.4183,0.7423352112676057,False
+quantile_reg,솔레이마니 암살 × Gold+GPR+IA × τ=0.1 × Gold_x_GPR,0.0094,0.049350000000000005,True
+quantile_reg,솔레이마니 암살 × Gold+GPR+IA × τ=0.5 × Gold_z,0.0027,0.017905263157894737,True
+quantile_reg,솔레이마니 암살 × Gold+GPR+IA × τ=0.5 × GPR_custom_z,0.5466,0.8502666666666667,False
+quantile_reg,솔레이마니 암살 × Gold+GPR+IA × τ=0.5 × Gold_x_GPR,0.4972,0.8141538461538461,False
+quantile_reg,러-우 전쟁 × SP500+GPR+IA × τ=0.05 × SP500_z,0.0,0.0,True
+quantile_reg,러-우 전쟁 × SP500+GPR+IA × τ=0.05 × GPR_custom_z,0.6453,0.8970652173913044,False
+quantile_reg,러-우 전쟁 × SP500+GPR+IA × τ=0.05 × SP500_x_GPR,0.8958,0.9589317073170731,False
+quantile_reg,러-우 전쟁 × SP500+GPR+IA × τ=0.1 × SP500_z,0.0,0.0,True
+quantile_reg,러-우 전쟁 × SP500+GPR+IA × τ=0.1 × GPR_custom_z,0.4626,0.8095500000000001,False
+quantile_reg,러-우 전쟁 × SP500+GPR+IA × τ=0.1 × SP500_x_GPR,0.3056,0.5834181818181818,False
+quantile_reg,러-우 전쟁 × SP500+GPR+IA × τ=0.5 × SP500_z,0.0,0.0,True
+quantile_reg,러-우 전쟁 × SP500+GPR+IA × τ=0.5 × GPR_custom_z,0.9293,0.9589317073170731,False
+quantile_reg,러-우 전쟁 × SP500+GPR+IA × τ=0.5 × SP500_x_GPR,0.9292,0.9589317073170731,False
+quantile_reg,러-우 전쟁 × Gold+GPR+IA × τ=0.05 × Gold_z,0.204,0.47646666666666665,False
+quantile_reg,러-우 전쟁 × Gold+GPR+IA × τ=0.05 × GPR_custom_z,0.7285,0.9287821782178218,False
+quantile_reg,러-우 전쟁 × Gold+GPR+IA × τ=0.05 × Gold_x_GPR,0.5211,0.8311215189873419,False
+quantile_reg,러-우 전쟁 × Gold+GPR+IA × τ=0.1 × Gold_z,0.9456,0.9605232,False
+quantile_reg,러-우 전쟁 × Gold+GPR+IA × τ=0.1 × GPR_custom_z,0.755,0.9326470588235294,False
+quantile_reg,러-우 전쟁 × Gold+GPR+IA × τ=0.1 × Gold_x_GPR,0.0341,0.1449,False
+quantile_reg,러-우 전쟁 × Gold+GPR+IA × τ=0.5 × Gold_z,0.6538,0.8970652173913044,False
+quantile_reg,러-우 전쟁 × Gold+GPR+IA × τ=0.5 × GPR_custom_z,0.504,0.8141538461538461,False
+quantile_reg,러-우 전쟁 × Gold+GPR+IA × τ=0.5 × Gold_x_GPR,0.8394,0.9359681415929204,False
+quantile_reg,이스라엘-하마스 × SP500+GPR+IA × τ=0.05 × SP500_z,0.0052,0.029781818181818184,True
+quantile_reg,이스라엘-하마스 × SP500+GPR+IA × τ=0.05 × GPR_custom_z,0.6758,0.9155999999999999,False
+quantile_reg,이스라엘-하마스 × SP500+GPR+IA × τ=0.05 × SP500_x_GPR,0.0169,0.0819,False
+quantile_reg,이스라엘-하마스 × SP500+GPR+IA × τ=0.1 × SP500_z,0.1069,0.29281304347826087,False
+quantile_reg,이스라엘-하마스 × SP500+GPR+IA × τ=0.1 × GPR_custom_z,0.5981,0.8877931034482759,False
+quantile_reg,이스라엘-하마스 × SP500+GPR+IA × τ=0.1 × SP500_x_GPR,0.1053,0.29281304347826087,False
+quantile_reg,이스라엘-하마스 × SP500+GPR+IA × τ=0.5 × SP500_z,0.0009,0.0070875,True
+quantile_reg,이스라엘-하마스 × SP500+GPR+IA × τ=0.5 × GPR_custom_z,0.7198,0.9287821782178218,False
+quantile_reg,이스라엘-하마스 × SP500+GPR+IA × τ=0.5 × SP500_x_GPR,0.0539,0.1873421052631579,False
+quantile_reg,이스라엘-하마스 × Gold+GPR+IA × τ=0.05 × Gold_z,0.6043,0.8877931034482759,False
+quantile_reg,이스라엘-하마스 × Gold+GPR+IA × τ=0.05 × GPR_custom_z,0.613,0.8877931034482759,False
+quantile_reg,이스라엘-하마스 × Gold+GPR+IA × τ=0.05 × Gold_x_GPR,0.0345,0.1449,False
+quantile_reg,이스라엘-하마스 × Gold+GPR+IA × τ=0.1 × Gold_z,0.6368,0.8970652173913044,False
+quantile_reg,이스라엘-하마스 × Gold+GPR+IA × τ=0.1 × GPR_custom_z,0.3012,0.5834181818181818,False
+quantile_reg,이스라엘-하마스 × Gold+GPR+IA × τ=0.1 × Gold_x_GPR,0.1478,0.3844285714285714,False
+quantile_reg,이스라엘-하마스 × Gold+GPR+IA × τ=0.5 × Gold_z,0.3894,0.7009200000000001,False
+quantile_reg,이스라엘-하마스 × Gold+GPR+IA × τ=0.5 × GPR_custom_z,0.5027,0.8141538461538461,False
+quantile_reg,이스라엘-하마스 × Gold+GPR+IA × τ=0.5 × Gold_x_GPR,0.2631,0.5500622950819671,False
+quantile_reg,이스라엘-이란 충돌 × SP500+GPR+IA × τ=0.05 × SP500_z,0.0,0.0,True
+quantile_reg,이스라엘-이란 충돌 × SP500+GPR+IA × τ=0.05 × GPR_custom_z,0.7168,0.9287821782178218,False
+quantile_reg,이스라엘-이란 충돌 × SP500+GPR+IA × τ=0.05 × SP500_x_GPR,0.927,0.9589317073170731,False
+quantile_reg,이스라엘-이란 충돌 × SP500+GPR+IA × τ=0.1 × SP500_z,0.0,0.0,True
+quantile_reg,이스라엘-이란 충돌 × SP500+GPR+IA × τ=0.1 × GPR_custom_z,0.5018,0.8141538461538461,False
+quantile_reg,이스라엘-이란 충돌 × SP500+GPR+IA × τ=0.1 × SP500_x_GPR,0.7105,0.9287821782178218,False
+quantile_reg,이스라엘-이란 충돌 × SP500+GPR+IA × τ=0.5 × SP500_z,0.0,0.0,True
+quantile_reg,이스라엘-이란 충돌 × SP500+GPR+IA × τ=0.5 × GPR_custom_z,0.7625,0.932766990291262,False
+quantile_reg,이스라엘-이란 충돌 × SP500+GPR+IA × τ=0.5 × SP500_x_GPR,0.5964,0.8877931034482759,False
+quantile_reg,이스라엘-이란 충돌 × Gold+GPR+IA × τ=0.05 × Gold_z,0.7409,0.9287821782178218,False
+quantile_reg,이스라엘-이란 충돌 × Gold+GPR+IA × τ=0.05 × GPR_custom_z,0.8197,0.9359681415929204,False
+quantile_reg,이스라엘-이란 충돌 × Gold+GPR+IA × τ=0.05 × Gold_x_GPR,0.7918,0.9359681415929204,False
+quantile_reg,이스라엘-이란 충돌 × Gold+GPR+IA × τ=0.1 × Gold_z,0.4988,0.8141538461538461,False
+quantile_reg,이스라엘-이란 충돌 × Gold+GPR+IA × τ=0.1 × GPR_custom_z,0.8078,0.9359681415929204,False
+quantile_reg,이스라엘-이란 충돌 × Gold+GPR+IA × τ=0.1 × Gold_x_GPR,0.8346,0.9359681415929204,False
+quantile_reg,이스라엘-이란 충돌 × Gold+GPR+IA × τ=0.5 × Gold_z,0.0412,0.162225,False
+quantile_reg,이스라엘-이란 충돌 × Gold+GPR+IA × τ=0.5 × GPR_custom_z,0.7957,0.9359681415929204,False
+quantile_reg,이스라엘-이란 충돌 × Gold+GPR+IA × τ=0.5 × Gold_x_GPR,0.904,0.9589317073170731,False
+quantile_reg,이란 전쟁 × SP500+GPR+IA × τ=0.05 × SP500_z,0.0032,0.02016,True
+quantile_reg,이란 전쟁 × SP500+GPR+IA × τ=0.05 × GPR_custom_z,0.2346,0.5185894736842105,False
+quantile_reg,이란 전쟁 × SP500+GPR+IA × τ=0.05 × SP500_x_GPR,0.2728,0.5544,False
+quantile_reg,이란 전쟁 × SP500+GPR+IA × τ=0.1 × SP500_z,0.0006,0.005399999999999999,True
+quantile_reg,이란 전쟁 × SP500+GPR+IA × τ=0.1 × GPR_custom_z,0.099,0.29281304347826087,False
+quantile_reg,이란 전쟁 × SP500+GPR+IA × τ=0.1 × SP500_x_GPR,0.9331,0.9589317073170731,False
+quantile_reg,이란 전쟁 × SP500+GPR+IA × τ=0.5 × SP500_z,0.0002,0.0019384615384615384,True
+quantile_reg,이란 전쟁 × SP500+GPR+IA × τ=0.5 × GPR_custom_z,0.0188,0.08773333333333334,False
+quantile_reg,이란 전쟁 × SP500+GPR+IA × τ=0.5 × SP500_x_GPR,0.3026,0.5834181818181818,False
+quantile_reg,이란 전쟁 × Gold+GPR+IA × τ=0.05 × Gold_z,0.655,0.8970652173913044,False
+quantile_reg,이란 전쟁 × Gold+GPR+IA × τ=0.05 × GPR_custom_z,0.1495,0.3844285714285714,False
+quantile_reg,이란 전쟁 × Gold+GPR+IA × τ=0.05 × Gold_x_GPR,0.8276,0.9359681415929204,False
+quantile_reg,이란 전쟁 × Gold+GPR+IA × τ=0.1 × Gold_z,0.9165,0.9589317073170731,False
+quantile_reg,이란 전쟁 × Gold+GPR+IA × τ=0.1 × GPR_custom_z,0.2935,0.5834181818181818,False
+quantile_reg,이란 전쟁 × Gold+GPR+IA × τ=0.1 × Gold_x_GPR,0.1047,0.29281304347826087,False
+quantile_reg,이란 전쟁 × Gold+GPR+IA × τ=0.5 × Gold_z,0.1875,0.4725,False
+quantile_reg,이란 전쟁 × Gold+GPR+IA × τ=0.5 × GPR_custom_z,0.007,0.03834782608695652,True
+quantile_reg,이란 전쟁 × Gold+GPR+IA × τ=0.5 × Gold_x_GPR,0.0584,0.1886769230769231,False

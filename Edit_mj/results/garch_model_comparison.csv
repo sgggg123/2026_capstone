@@ -1,0 +1,6 @@
+﻿모델,설명,외생변수,AIC,BIC,Log-Lik,α+β,수렴
+Model3,VIX + Fear&Greed,"VIX_scaled, fear_greed_lag1_scaled",9578.71,9617.26,-4782.355,0.9961,✅
+Model4,공식 GPR + 시장심리,"GPR_zscore_scaled, VIX_scaled, fear_greed_lag1_scaled",9580.39,9624.447,-4782.195,0.9975,✅
+Model5,커스텀 GPR + 시장심리,"GPR_custom_scaled, VIX_scaled, fear_greed_lag1_scaled",9580.417,9624.474,-4782.208,0.996,✅
+Model2,커스텀 GPR 단독,GPR_custom_scaled,9582.402,9615.445,-4785.201,0.9937,✅
+Model1,공식 GPR 단독,GPR_zscore_scaled,9582.517,9615.56,-4785.259,0.9937,✅
