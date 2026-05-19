@@ -30,3 +30,15 @@ Thumbs.db
 # _review/
 # test/
 new/
+
+# 노트북 스크래치 출력 (정본은 Edit_mj/results/에 표준 이름으로 복사됨)
+# - 패턴은 각 노트북 폴더에만 앵커되며 Edit_mj/results/는 영향 없음
+Edit_mj/event_study_*.csv
+Edit_mj/event_study_*.png
+Edit_mj/GPR_custom_analysis/master_data_generated/quantreg_*.csv
+Edit_mj/GPR_custom_analysis/master_data_generated/quantreg_*.png
+Edit_mj/GPR_custom_analysis/master_data_generated/robust_*.csv
+GARCH/garch_*.csv
+GARCH/garch_*.png
+GARCH/egarch_*.csv
+GARCH/egarch_*.png
