@@ -1,0 +1,15 @@
+# 팀원 repo 의존성 (정본 7개 노트북 import + pip 명령 union)
+# 작성: 2026-05-02
+
+yfinance>=0.2.0
+pandas>=2.0
+numpy>=1.24
+matplotlib>=3.7
+seaborn>=0.12
+scipy>=1.10
+statsmodels>=0.14
+arch>=6.2
+requests>=2.31
+openpyxl>=3.1
+ipython
+jupyter

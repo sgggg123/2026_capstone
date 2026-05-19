@@ -129,7 +129,9 @@ if section == "통합 판정":
 # ══════════════════════════════════════════════════════
 elif section == "이벤트 스터디":
     st.header("이벤트 스터디 — MacKinlay 1997 (±17일, Bootstrap 5000회, BH-FDR + Placebo)")
-    es = load_csv('event_study_car_bh.csv') or load_csv('event_study_car.csv')
+    es = load_csv('event_study_car_bh.csv')
+    if es is None:
+        es = load_csv('event_study_car.csv')
     if es is None:
         st.error("event_study_car_bh.csv 없음")
     else:
@@ -176,7 +178,9 @@ elif section == "이벤트 스터디":
 # ══════════════════════════════════════════════════════
 elif section == "분위수 회귀":
     st.header("분위수 회귀 — Koenker & Bassett 1978 (HAC SE, BH-FDR)")
-    qr = load_csv('quantile_results_bh.csv') or load_csv('quantile_results.csv')
+    qr = load_csv('quantile_results_bh.csv')
+    if qr is None:
+        qr = load_csv('quantile_results.csv')
     if qr is None:
         st.error("quantile_results 없음")
     else:
